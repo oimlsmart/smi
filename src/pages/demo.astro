@@ -1,0 +1,40 @@
+---
+import { Base, MinisiteNav } from '@oimlsmart/site-shell'
+import '../styles/app.css'
+
+const NAV = [
+  { label: 'About', href: '/' },
+  { label: 'Story', href: '/story' },
+  { label: 'Docs', href: '/docs' },
+  { label: 'Demo', href: '/demo' },
+]
+---
+
+<Base title="Driving a twin endpoint" description="A narrated session against a SMART twin endpoint.">
+  <MinisiteNav sections={NAV} base="/smi" />
+  <main class="max-w-3xl mx-auto px-6 py-14 docs-body">
+    <p class="font-mono text-xs tracking-widest uppercase text-ink-muted mb-3">SMART Measuring Instruments · Demo</p>
+    <h1 class="font-serif text-3xl font-semibold text-ink mb-6">Driving a twin endpoint</h1>
+
+    <p>A SMART twin answers GraphQL at its <code>/twin</code> endpoint. The session below probes the twin the way an evaluator does: identity first (IS), then its registers (HAS), then its behavior (DOES). The endpoint in this walkthrough is the <a href="https://www.oimlsmart.org/sst/" class="text-accent">simulated twin</a> — it says so, plainly; a physical SMI answers identically.</p>
+
+    <h2>IS — what it is</h2>
+    <pre><code>{`{ instrument { id kind serial model } }`}
+{`{ "instrument": { "id": "acme-lc500", "kind": "load-cell",
+  "serial": "SN-0042", "model": "LC-500 C3" } }`}</code></pre>
+
+    <h2>HAS — what it holds</h2>
+    <pre><code>{`{ environmentalContext { temperatureDegC humidityPercentRh pressureKPa } }`}
+{`{ "environmentalContext": { "temperatureDegC": 20.1,
+  "humidityPercentRh": 49.6, "pressureKPa": 101.2 } }`}</code></pre>
+
+    <h2>DOES — what it does</h2>
+    <pre><code>{`{ indication { value unit servedAt } }`}
+{`{ "indication": { "value": 40.003, "unit": "kg", "servedAt": 86412 } }`}</code></pre>
+
+    <p>The reading carries its serve time — a stale twin degrades to <em>indeterminate</em>, never a silent pass. That rule, and the probe evidence behind the twin certificate, are in <a href="/smi/docs/" class="text-accent">the SMI documentation</a>.</p>
+
+    <h2>Drive it yourself</h2>
+    <p>The <a href="https://www.oimlsmart.org/sst/" class="text-accent">SST minisite</a> hosts the simulated twins and the console walkthrough (place a load, change the temperature, read the indication back).</p>
+  </main>
+</Base>

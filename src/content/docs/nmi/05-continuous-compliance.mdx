@@ -1,0 +1,79 @@
+---
+title: 'Continuous Compliance and the Evidence Trail'
+shortTitle: 'Continuous Compliance'
+description: 'The compliance engine watches the twin against its certified promises; every judgment leaves a traceable record.'
+eyebrow: 'SMI · 05'
+order: 5
+---
+
+> *In this page:* the monitor, the verdict engine, the evidence
+> streams, and the re-judgment path. What continuous compliance means
+> for an instrument owner and for an authority.
+
+---
+
+## 1. The monitor
+
+A certified twin is watched, not trusted. The monitor binds the twin
+endpoint and cycles on a schedule and on state change: it reads the
+served registers, and it judges each read against the instrument’s
+certified promises (the accuracy envelope, the declared
+characteristics, the operational conditions). The cycle produces
+verdicts, and the verdicts accrue into the instrument’s compliance
+stream.
+
+The monitor’s rules are the Recommendation’s own: the same constraints
+the type evaluation judged at certification time, now judged against
+live service.
+
+## 2. What a judgment can say
+
+The verdict engine’s live vocabulary is deliberately three-valued:
+
+- **Pass.** The served value holds the promise, with the serve-time
+  freshness proven.
+- **Fail.** The served value violates the promise (a drift beyond the
+  envelope, a characteristic out of its declared range).
+- **Indeterminate.** The engine cannot judge: the twin stopped
+  serving, serves stale, or the reference channel’s provenance is
+  insufficient. Indeterminate is not a fail; it is the honest answer
+  when the basis is missing, and it carries health events so the
+  outage is visible.
+
+A silent pass is the one outcome the engine refuses: a value that
+cannot prove its freshness is never reported as passing.
+
+## 3. The evidence trail
+
+Every judgment leaves a record, and the records chain:
+
+- **Probe records** (from twin certification): the channel, the
+  reference value, the served value, the delta, the verdict.
+- **Verdict stream** (from the monitor): each cycle’s judgment with
+  its basis (the served registers it judged from) and the definition
+  version it judged with.
+- **Health events** (from the endpoint): outages, staleness, recovery.
+- **Lifecycle events** (from the certificate): flags, suspensions,
+  reinstatements, re-judgments.
+
+An auditor can walk the chain from the clause, through the certified
+promise, to last quarter’s verdict history, to this morning’s batch
+records. The trail is the platform’s runtime, not a report generated
+after the fact.
+
+## 4. Re-judgment
+
+When the basis changes (a repaired endpoint, a corrected register, a
+renewed probe), the chain re-judges: the same promises, the same
+engine, the corrected evidence. The re-judgment is recorded as its own
+event with provenance, and the certificate’s lifecycle reflects it
+(suspension, reinstatement). Nothing is edited silently; the history
+shows both the original judgment and its correction.
+
+## 5. For the authority
+
+For a legal-metrology authority, continuous compliance is the point of
+the SMART instrument: certification stops being a point-in-time act
+and becomes a surveilled state. The authority reads the same verdict
+chain the instrument owner sees, judges from the same definitions, and
+can re-run any judgment from its recorded basis.
