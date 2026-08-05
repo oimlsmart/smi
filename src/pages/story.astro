@@ -1,0 +1,31 @@
+---
+import { Base, MinisiteNav } from '@oimlsmart/site-shell'
+import '../styles/app.css'
+
+const NAV = [
+  { label: 'About', href: '/' },
+  { label: 'Story', href: '/story' },
+  { label: 'Docs', href: '/docs' },
+  { label: 'Demo', href: '/demo' },
+]
+---
+
+<Base title="The story" description="From the admin shell to the SMART twin.">
+  <MinisiteNav sections={NAV} base="/smi" />
+  <main class="max-w-3xl mx-auto px-6 py-14 docs-body">
+    <p class="font-mono text-xs tracking-widest uppercase text-ink-muted mb-3">SMART Measuring Instruments · Story</p>
+    <h1 class="font-serif text-3xl font-semibold text-ink mb-6">From the admin shell to the SMART twin</h1>
+
+    <p>Industry already has a digital-twin interface idea: the asset administration shell, an API to a device. But a command surface is not a twin — it answers "what can I ask this device to do?" and nothing about "what is this device, and does it still hold its certified type?" The gap is the difference between remote control and legal metrology.</p>
+
+    <p>The SMART Measuring Instrument takes the other path: the twin is the instrument's model, live. The Recommendation declares what it governs of an instrument — its identity, its metrological characteristics, its indication process — and the twin serves exactly that surface, in the Recommendation's own vocabulary. A load cell's twin serves the indication a calibrated weight produces; a gas analyzer's twin serves each channel's concentration. The twin is a tailored projection of whatever fuller twin the manufacturer runs, and the Recommendation's model is what makes the projection certifiable.</p>
+
+    <h2>Why a projection, not the whole twin</h2>
+    <p>A manufacturer's full digital twin may simulate, predict, and decorate far beyond the Recommendation. Legal metrology needs a smaller, harder surface: what the Recommendation measures, at the uncertainty it allows, with the provenance it demands. The SMART twin is that surface — declared per Recommendation, so an evaluator anywhere in the world reads the same registers with the same meaning.</p>
+
+    <h2>Simulation included</h2>
+    <p>Because the twin's surface is standardized, it can be simulated honestly: the SST for Measuring Instruments simulates SMART twins for training and development, with realistic physics. Testers learn the workflow without hardware; developers integrate without a lab.</p>
+
+    <p class="mt-8"><a href="/smi/docs/" class="text-accent font-medium">The SMI documentation walks each surface →</a></p>
+  </main>
+</Base>

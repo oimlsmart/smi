@@ -1,0 +1,77 @@
+---
+title: 'Binding a Physical Instrument'
+shortTitle: 'Binding an Instrument'
+description: 'From the manufacturer’s reference model to a running twin endpoint: how a physical instrument becomes an SMI.'
+eyebrow: 'SMI · 04'
+order: 4
+---
+
+> *In this page:* the two ways an instrument model reaches a user, and
+> what it takes to bind a live twin endpoint to a physical instrument.
+
+---
+
+## 1. The manufacturer’s reference model
+
+The path starts at the manufacturer. The manufacturer defines a
+reference model of its specific instrument model: each aspect of the
+instrument (its identity, its metrological characteristics, its
+behavior) mapped directly onto the Recommendation’s model nodes,
+relations, constraints, and promises. The mapping is not decorative:
+it is what makes the instrument evaluable, because the evaluator reads
+the instrument through the same Recommendation everywhere.
+
+The reference model is a general promise about the type, not a live
+object. It says: an instrument of this model serves these registers,
+with these units, under these rules.
+
+## 2. The user’s two ways of consuming it
+
+The user of an instrument instance consumes the manufacturer’s model
+in one of two ways, and the distinction is the liveness:
+
+1. **Abstract import.** The user imports the reference model into their
+   own implementation model as a design-time reference. No live
+   connection exists. The user validates their own processes against
+   the general promise (or a point-in-time snapshot of it) and plans
+   against the declared surface.
+2. **Live twin integration.** The user binds the live twin endpoint of
+   their specific instrument instance into their own implementation
+   model (the digital twin of their organization’s operations). The
+   instrument’s live registers become inputs to the user’s own
+   processes, and the compliance engine can surveil the instrument
+   continuously.
+
+An implementation model can import many reference models at once, and
+a complex implementation can be viewed through any single reference’s
+lens; the layers compose without new primitives.
+
+## 3. Binding the live endpoint
+
+A live binding is an operational act, not a certification act. To bind
+a twin endpoint to a physical instrument:
+
+1. **Stand up the endpoint.** The instrument (or its gateway) serves
+   the twin projection at a GraphQL endpoint, with the declared
+   interface: the IS/HAS/DOES channels of the Recommendation.
+2. **Declare the binding.** The owner registers the endpoint against
+   the instrument instance (serial, model, the certificate it rides)
+   in their own implementation model.
+3. **Probe the binding.** The twin certification probe runs: the
+   reference drives the physical instrument, the endpoint serves the
+   indication, and the evidence records the correspondence. Only then
+   does the binding become a certified one.
+
+The endpoint itself is engineering: a small service beside the
+instrument that answers the projection. The SST for Measuring
+Instruments shows the same shape with simulated physics, and an SMI
+manufacturer ships the same shape with real sensing.
+
+## 4. What the binding enables
+
+A certified live binding is what makes the rest of the program real
+for an instrument user: continuous compliance (the engine watches the
+twin against its promises), the evidence trail (every judgment has its
+probe and serve records), and the multi-component case (a device
+assembled from SMART-twin-capable components, where each component’s
+certified twin composes into the device’s own).

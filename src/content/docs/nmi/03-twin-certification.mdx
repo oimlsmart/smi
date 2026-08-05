@@ -1,0 +1,75 @@
+---
+title: 'The Twin Certification Program'
+shortTitle: 'Twin Certification'
+description: 'The TW-1 governing document: how a SMART twin is certified to hold its binding to the physical instrument.'
+eyebrow: 'SMI · 03'
+order: 3
+---
+
+> *In this page:* the twin certification program (TW-1): the promise it
+> certifies, the probe procedure, and the certificate’s suspension
+> semantics.
+
+---
+
+## 1. The promise under certification
+
+The twin certificate certifies one promise: **the twin’s indication
+equals the physical instrument’s indication, within the Recommendation’s
+envelope, at the time of the probe.** The certificate binds a specific
+twin endpoint to a specific instrument instance, for a declared
+Recommendation and accuracy class.
+
+This is deliberately not a cryptographic claim. The binding is
+declarative: it is a claim about correspondence, tested by procedure,
+recorded as evidence. Signing has its place for multi-component devices
+(a device assembled from SMART-twin-capable components, where each
+component’s certificate composes), but the primitive certificate rests
+on the probe.
+
+## 2. The probe procedure (TW-1, D2)
+
+The probe is a procedure, not an inspection of code. It runs through
+the declared probe channels, each carrying its declared traceability
+limitation:
+
+1. **Reference instrument.** A calibrated reference drives the
+   physical instrument (a calibrated weight on the load cell, a
+   reference gas on the analyzer). The twin’s served indication is read
+   at the same time.
+2. **Observer attestation.** A human reads the physical display and
+   attests it (the epistemic wall: the observation is admissible
+   evidence, with its declared limitation and its ±½ graduation
+   uncertainty riding the record).
+3. **Simulated ground truth.** In development and training, the
+   simulated twin’s own ground truth stands in, plainly marked as
+   simulation.
+
+The twin passes the probe when the served indication and the reference
+agree within the envelope at every probed point, and the served
+freshness holds at every read. The evidence records every probe: the
+channel, the reference value, the served value, the serve time, the
+delta, the verdict.
+
+## 3. The verdict chain
+
+The twin certificate rides the same chain as the type evaluation: the
+probe evidence feeds the verdict engine, the engine judges against the
+certified promises, the certificate issues when every probed promise
+holds. The certificate itself carries the promises-as-verified
+projection, so anyone reading it sees what was probed, when, and how it
+judged.
+
+## 4. Suspension semantics
+
+A twin certificate is a living claim, and its lifecycle matches:
+
+- **A drift degrades.** A served indication outside the envelope flags
+  the certificate; the flag is recorded with the drift evidence.
+- **An outage is indeterminate.** A twin that stops serving, or serves
+  stale, does not fail: it degrades to indeterminate, with health events
+  logged. A silent pass is the one outcome the chain refuses.
+- **A re-judgment re-rides the chain.** Corrected evidence (a repaired
+  endpoint, a renewed probe) re-judges the certificate against the same
+  promises. Suspension and reinstatement are recorded with provenance,
+  never silent edits.

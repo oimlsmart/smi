@@ -1,0 +1,87 @@
+---
+title: 'The SMART Twin Projection'
+shortTitle: 'The Twin Projection'
+description: 'What Primmel governs of an instrument’s full digital twin, and why the tailored projection is the certifiable surface.'
+eyebrow: 'SMI · 02'
+order: 2
+---
+
+> *In this page:* what the SMART twin is in relation to a manufacturer’s
+> full digital twin, and why the projection, not the full twin, is the
+> surface that can be certified.
+
+---
+
+## 1. Three things, not one
+
+The phrase "digital twin" covers three distinct objects, and the SMART
+program keeps them separate because they answer to different rules.
+
+1. **The physical instrument.** The load cell on the bench, the gas
+   analyzer on the stack. Legal metrology attaches to this: its type is
+   certified, its indication is evidence.
+2. **The full digital twin.** Whatever the manufacturer runs beside the
+   physical unit: physics simulation, fleet telemetry, predictive
+   maintenance models. Its scope is the manufacturer’s choice; it may
+   model far more than any Recommendation asks.
+3. **The SMART twin.** A tailored projection of the full twin, scoped
+   by the Recommendation the instrument was built to. It serves exactly
+   the surface the Recommendation governs: the instrument’s identity
+   (IS), its metrological characteristics and registers (HAS), and its
+   indication behavior (DOES), in the Recommendation’s own vocabulary.
+
+The relationship is directional: the full twin represents the physical
+device; the SMART twin projects what the Recommendation declares it
+governs of that representation. The SMART Recommendation is where the
+declaration lives, so every evaluator reads the same projection.
+
+## 2. Why the projection is the certifiable surface
+
+A certificate states that a type holds. To certify the twin, the
+statement must be precise: *the twin’s indication equals the physical
+instrument’s indication, within the Recommendation’s envelope.* Against
+a full twin that statement is untestable, because the full twin serves
+far more than the Recommendation measures. Against the projection the
+statement is exactly testable, because the projection is declared: the
+registers are named, the units are fixed, the serve-time and freshness
+rules are stated, and the probe procedure is defined.
+
+This is the same discipline as the type evaluation: constrain the
+subject’s IS/HAS/DOES where the Recommendation constrains it, and
+record the evidence. The twin certificate rides the same verdict chain
+as the certificate of conformity, not a parallel invention.
+
+## 3. What the projection serves
+
+Each SMART twin answers in three channels:
+
+- **IS**: the instrument’s identity. Kind, model, serial, the type it
+  claims, the certificate it rides.
+- **HAS**: its current registers. The environmental context
+  (temperature, humidity, pressure), the configuration, the state of
+  any declared characteristics.
+- **DOES**: its behavior. The indication process with its serve time,
+  the operations the Recommendation declares (zero, span adjustment,
+  self-test), each with its declared preconditions.
+
+Every served value carries its provenance and its serve time. A value
+that cannot prove its freshness degrades the answer to *indeterminate*;
+the projection never silently reports stale as current.
+
+## 4. The manufacturer’s two options
+
+An instrument provider can ship the projection two ways, and both are
+first-class:
+
+- **The abstract reference model.** The manufacturer publishes the
+  instrument model’s reference twin: a general promise of what the type
+  serves, not a live endpoint. A user imports it as a design-time
+  reference (in their own implementation model) and validates against
+  it without any live connection.
+- **The live twin endpoint.** The manufacturer (or the instrument’s
+  owner) runs the live projection: a GraphQL endpoint an evaluator
+  binds to, queries, and surveils. This is the path the twin
+  certification program and continuous compliance run on.
+
+The projection is declared the same way in both cases; only the
+liveness differs.
