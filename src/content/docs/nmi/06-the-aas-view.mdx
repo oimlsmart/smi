@@ -1,0 +1,91 @@
+---
+title: 'The Instrument in AAS Infrastructure'
+shortTitle: 'The AAS View'
+description: 'The same instrument, seen through the Asset Administration Shell API: the twin projected as an AAS shell with submodels, the certificate carried as the conformity submodel.'
+eyebrow: 'SMI · 06'
+order: 6
+---
+
+> *In this page:* what the Asset Administration Shell (AAS) is to an
+> instrument owner, how the platform answers the AAS profile for a
+> bound twin, and why the AAS view is a projection, never a second
+> twin.
+
+---
+
+## 1. The industrial registry fabric
+
+Factories and their digital-twin infrastructure increasingly address
+equipment through the Asset Administration Shell: one shell per asset,
+carrying submodels (a nameplate, technical data, documentation),
+indexed by registries, and read over a standard HTTP API (the AAS
+Part 2 profile, IDTA-01002). Legal metrology cannot ignore that
+fabric: a measuring instrument that cannot be addressed there is
+invisible to the systems that already schedule, audit, and procure
+everything around it.
+
+An SMI does not become an AAS-native device to take part. The
+platform's twin endpoint already serves the governed projection of the
+instrument (its identity, its registers, its behavior); what the AAS
+side needs is someone answering the AAS profile for it. That is the
+adapter: a projection service in the platform's gateway layer that
+translates AAS API requests into twin-endpoint reads and answers with
+submodel projections.
+
+## 2. The same instrument, two readings
+
+The twin's anatomy is the Recommendation's IS/HAS/DOES; the AAS
+anatomy is the shell's submodels. The adapter bridges them:
+
+- **IS, the identity**, becomes the **Nameplate** submodel (the
+  IDTA-02006 fields): the manufacturer, the designation, the serial,
+  the versions, the operator-declared address and order code.
+- **HAS, the characteristics**, becomes the **Technical Data**
+  submodel (the IDTA-02003 frame): the classification axes and the
+  design parameters, exactly as the twin serves them.
+- **The certificate** becomes the **Legal Metrology Conformity**
+  submodel: the register's own answer, carried by reference, with the
+  live status anchors, so a suspended certificate reads suspended
+  wherever the shell is carried.
+- **DOES, the behavior**, becomes an **Operational Data** submodel:
+  the live registers, receipt-stamped, and the instrument's declared
+  operations as capability entries. The AAS ecosystem has no settled
+  template for this yet; the submodel says so, in its own namespace.
+  Invocation stays on the twin endpoint: the adapter answers reads
+  only.
+
+The two readings never diverge, because the AAS view is computed from
+the SMART view at request time. The adapter holds no cache and no
+copy: if the twin stops answering, the AAS side hears why (an honest
+unavailable), never a stale reading served as live.
+
+## 3. What this is worth to an authority
+
+Three properties matter to a legal-metrology authority:
+
+1. **The twin stays governed.** The surface the AAS world sees is the
+   same served projection the twin-certification program judges. AAS
+   consumers read a certified surface, and the certificate they find
+   through the shell is the register's own, not a copy drifting in a
+   third system.
+2. **Nothing new to operate.** The adapter is off until the instance
+   declares a twin binding (one environment declaration naming the
+   twin endpoint and the shell's identity). There is no second twin
+   database, no replication channel, no extra service: the adapter is
+   part of the platform's API, and an undeclared instance simply does
+   not answer.
+3. **The ecosystem reads with its own tools.** AAS registries index
+   the shell by endpoint; engineering tools read the submodels with
+   the clients they already run. The platform integrates with the
+   fabric without adopting anyone's home stack as its own canon.
+
+## 4. Reading it yourself
+
+The platform's demonstration boots the simulated ACME LC-500, binds
+it, and serves its shell through the adapter: the same instrument,
+seen through the twin lab and through the AAS API, side by side. The
+full mapping document, the endpoint reference, the operator's
+declaration field by field, and the honest statement of what the
+adapter does and does not answer are in the platform's interop
+documentation (the twin → AAS adapter mapping, docs/interop in the
+platform repository).
