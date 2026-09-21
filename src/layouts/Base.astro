@@ -1,0 +1,30 @@
+---
+/**
+ * The SMI minisite's base layout — the house shell from the package
+ * (one chrome SSOT), fed the site's OWN injected config (TODO.public
+ * track 02): the package went machinery-only at 0.2.0, so the brand,
+ * the nav model, and the footer content come from src/data/ and thread
+ * down through the shell's typed contract. This layout is the single
+ * injection point; the minisite nav strip stays page-local
+ * (MinisiteNav, mounted per page), and no AI surface is enabled — the
+ * site mounts none, so no services registry is declared.
+ *
+ * `title` is optional: the home page omits it and the shell renders
+ * the brand name alone; a page that passes one gets "page | site".
+ */
+import ShellBase from '@oimlsmart/site-shell/chrome/astro/Base.astro'
+import { BRAND } from '../data/brand'
+import { NAV_MODEL } from '../data/nav-config'
+import { FOOTER } from '../data/footer'
+import '../styles/app.css'
+
+interface Props {
+  title?: string
+  description?: string
+}
+const { title, description } = Astro.props
+---
+
+<ShellBase title={title ?? ''} description={description} brand={BRAND} nav={NAV_MODEL} footer={FOOTER}>
+  <slot />
+</ShellBase>
