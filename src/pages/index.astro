@@ -1,6 +1,7 @@
 ---
-import { Base, MinisiteNav, PageHero } from '@oimlsmart/site-shell'
-import '../styles/app.css'
+import { MinisiteNav, PageHero } from '@oimlsmart/site-shell'
+import Base from '../layouts/Base.astro'
+import { COMPONENT_ASSET_BASE } from '../data/site-meta'
 
 const NAV = [
   { label: 'About', href: '/' },
@@ -10,14 +11,15 @@ const NAV = [
 ]
 ---
 
-<Base title="SMART Measuring Instruments" description="OIML SMI — the physical measuring instrument that ships with a standards-defined digital twin.">
+<!-- No title prop: the home page renders the brand name alone. -->
+<Base description="OIML SMI — the physical measuring instrument that ships with a standards-defined digital twin.">
   <MinisiteNav sections={NAV} base="/smi" />
   <main class="max-w-4xl mx-auto px-6 py-14">
     <PageHero
       eyebrow="OIML SMART · Component 4"
       title="SMART Measuring Instruments"
       lede="A measuring instrument that ships with a standards-defined digital twin: queryable against the Recommendation it was built to, certifiable against it, and surveilled against it for life."
-      logo={{ name: 'smi', alt: 'The SMART Measuring Instruments logo.' }}
+      logo={{ name: 'smi', alt: 'The SMART Measuring Instruments logo.', base: COMPONENT_ASSET_BASE }}
     />
     <section class="mt-10 grid gap-6 md:grid-cols-2">
       <div class="border border-rule rounded-lg p-6 bg-paper-raised">
