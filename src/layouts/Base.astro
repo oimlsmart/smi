@@ -26,5 +26,6 @@ const { title, description } = Astro.props
 ---
 
 <ShellBase title={title ?? ''} description={description} brand={BRAND} nav={NAV_MODEL} footer={FOOTER}>
+  <meta name="robots" content="noindex, nofollow" slot="head" />
   <slot />
 </ShellBase>
