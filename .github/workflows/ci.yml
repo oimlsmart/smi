@@ -20,6 +20,9 @@ jobs:
       - name: Nav completeness gate
         run: npm run check:nav
 
+      - name: Shell pin gate
+        run: npm run check-shell-pin
+
       - name: Verify the page and the canonical logo asset
         run: |
           set -euo pipefail
